@@ -1,60 +1,47 @@
+from art import logo
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
             'v', 'w', 'x', 'y', 'z']
-
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
-text = input("Type your message:\n").lower()
-shift = int(input("Type the shift number:\n"))
+print(logo)
 
 
-def encrypt(text, shift):
+def cesar(text, shift, direction):
     n = len(text)
     text_list = []
     for i in text:
+        if i.isalpha() == True:
+            index_letter = alphabet.index(i)
+            if direction == 'encode':
+                shifted = index_letter + shift
+            elif direction == 'decode':
+                shifted = index_letter - shift
 
-        index_letter = alphabet.index(i)
-        shifted = index_letter + shift
-
-        if shifted > 25:
-            shifted = shifted - 26
-
-        shifted_letter = alphabet[shifted]
-        text_list.append(shifted_letter)
-
+            if shifted > 25:
+                modulo = shift%25-1
+                shifted_letter = alphabet[modulo]
+            else:
+                shifted_letter = alphabet[shifted]
+            text_list.append(shifted_letter)
+        else:
+            shifted_letter = i
+            text_list.append(shifted_letter)
     x = ''.join(text_list)
     print(f'The encrypted text: {x}')
 
-def decrypt(text, shift):
-    n = len(text)
-    text_list = []
-    for i in text:
-
-        index_letter = alphabet.index(i)
-        shifted = index_letter - shift
-
-        if shifted > 25:
-            shifted = shifted - 26
-
-        shifted_letter = alphabet[shifted]
-        text_list.append(shifted_letter)
-
-    x = ''.join(text_list)
-    print(f'The decrypted text: {x}')
-
-#TODO-1: Create a different function called 'decrypt' that takes the 'text' and 'shift' as inputs.
-
-  #TODO-2: Inside the 'decrypt' function, shift each letter of the 'text' *backwards* in the alphabet by the shift amount and print the decrypted text.
-  #e.g.
-  #cipher_text = "mjqqt"
-  #shift = 5
-  #plain_text = "hello"
-  #print output: "The decoded text is hello"
+#TODO: What if the user enters a shift that is greater than the number of letters in the alphabet?
+#Try running the program and entering a shift number of 45.
+#Add some code so that the program continues to work even if the user enters a shift number greater than 26.
+#Hint: Think about how you can use the modulus (%).
+running = True
+while running == True:
 
 
-#TODO-3: Check if the user wanted to encrypt or decrypt the message by checking the 'direction' variable.
-# Then call the correct function based on that 'drection' variable. You should be able to test the code to encrypt *AND* decrypt a message.
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
 
-if direction == 'encode':
-    encrypt(text, shift)
-elif direction == 'decode':
-    decrypt(text, shift)
-
+    cesar(text, shift, direction)
+    continue_program = input("Type 'yes' if you want to go again. Otherwise type 'no': ").lower()
+    if continue_program == 'yes':
+        running = True
+    elif continue_program == 'no':
+        running = False
