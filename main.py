@@ -24,10 +24,6 @@ def cesar(text, shift, direction):
     x = ''.join(text_list)
     print(f'The encrypted text: {x}')
 
-#TODO: What if the user enters a shift that is greater than the number of letters in the alphabet?
-#Try running the program and entering a shift number of 45.
-#Add some code so that the program continues to work even if the user enters a shift number greater than 26.
-#Hint: Think about how you can use the modulus (%).
 running = True
 while running == True:
 
