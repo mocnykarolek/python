@@ -3,7 +3,6 @@ alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
             'v', 'w', 'x', 'y', 'z']
 print(logo)
 
-
 def cesar(text, shift, direction):
     n = len(text)
     text_list = []
@@ -14,12 +13,10 @@ def cesar(text, shift, direction):
                 shifted = index_letter + shift
             elif direction == 'decode':
                 shifted = index_letter - shift
-
             if shifted > 25:
-                modulo = shift%25-1
-                shifted_letter = alphabet[modulo]
-            else:
-                shifted_letter = alphabet[shifted]
+                shifted = shifted%25-1
+
+            shifted_letter = alphabet[shifted]
             text_list.append(shifted_letter)
         else:
             shifted_letter = i
@@ -44,4 +41,5 @@ while running == True:
     if continue_program == 'yes':
         running = True
     elif continue_program == 'no':
+        print('\n*Program ends* \n')
         running = False
